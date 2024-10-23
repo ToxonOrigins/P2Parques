@@ -1,0 +1,58 @@
+body {
+    background-color: cadetblue;
+}
+
+.noi {
+    text-align: center;
+    padding: 6px;
+}
+
+img {
+    padding: 0%;
+    margin: 0%;
+    border-spacing: 0px;
+}
+
+table {
+    margin-top: 10%;
+    margin-left: 30%;
+
+    background-color: aliceblue;
+}
+
+td {
+    padding-left: 4%;
+}
+
+.oas {
+
+    margin-bottom: 5px;
+
+}
+
+#g {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 0%;
+}
+
+td {
+    padding-top: 10px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.btn-outline-dark {
+    margin: 0 1px;
+}
+
+#nombrenc {
+    margin-top: 5px;
+}
+
+#nombreng {
+    margin-top: 5px;
+}

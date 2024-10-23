@@ -1,0 +1,69 @@
+body {
+  background-color: cadetblue;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  margin-top: 10%;
+  width: 860px;
+}
+
+tr {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+
+.card-block .btn-outline-primary {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+td {
+  width: 200px;
+  height: 250px;
+}
+
+.card-flip {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-out;
+  background: white;
+  border: none;
+}
+
+.card-flip div {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+
+  border: none;
+}
+
+.card-flip .front {
+  position: relative;
+  z-index: 1;
+
+}
+.front img{
+  border-radius: 5px;
+}
+.card-flip .back {
+  position: absolute;
+  z-index: 0;
+  transform: rotateY(-180deg);
+  width: 200px;
+  height: 250px;
+  text-align: center;
+}
+
+.card-container:hover .card-flip {
+  transform: rotateY(180deg);
+}
+.card-container{
+  margin: auto 3px  3px;
+}

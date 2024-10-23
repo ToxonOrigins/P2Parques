@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Agregar juego</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/general.css">
+  <link rel="stylesheet" href="./css/update.css">
+  <link rel="shortcut icon" href="game_5930147.png" type="image/x-icon">
+  <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+    </script>
+  <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script defer src="./js/agregar.js"></script>
+  <script defer src="./js/general.js"></script>
+
+</head>
+
+<body>
+  <header></header>
+  <main>
+    <div id="app">
+      <table width=" 40%">
+        <td><label for="nombre">Nombre</label> <br>
+          <input type="text" name="nombre" id="nombre" v-model="nombre">
+          <div style="padding-top: 10px;"><label for="anio">Fecha de lanzamiento </label> <br>
+            <input type="date" name="anio" id="anio" v-model="anio">
+          </div>
+          <div>Género</div>
+          <div class="oas">
+            <div v-for="g in generos" class="btn-group">
+              <input class="btn-check" v-model.number="genero" :value="g.id" type="radio" :id="'btnradiog'+g.id" @click="eli= g.id">
+              <label class="btn btn-outline-dark " :for="'btnradiog'+g.id"> {{g.nombreg}}</label>
+            </div>
+          </div>
+          <label class="btn btn-outline-primary" @dblclick="esconderg = false" @click="esconderg = true">Añadir otro genero</label>
+          &nbsp;<button type="button" class="btn btn-danger" @click="eliminarg(eli)">Eliminar genero</button>
+          <div v-show="esconderg" bv><input type="text" name="nombreng" id="nombreng" v-model="nombreg">
+            <button type="button" class="btn btn-success btn-sm" @click="grabarg() , esconderg=false, nombreg= null">Guardar</button>
+          </div>
+          <div>Consola</div>
+          <div class="oas">
+            <div v-for="c in consolas" class="btn-group">
+              <input class="btn-check" v-model.number="consola" type="radio" :value="c.id" :id="'btnradio'+c.id" @click="elic= c.id">
+              <label class="btn btn-outline-dark " :for="'btnradio'+c.id" for="{{consola}}">{{c.nombrec}}</label>
+            </div>
+          </div>
+          <button class="btn btn-outline-primary" @dblclick="esconderc = false" @click="esconderc = true">Añadir otra consola </button>
+          &nbsp;<button type="button" class="btn btn-danger" @click="eliminarc(elic)">Eliminar consola</button>
+          <div v-show="esconderc">
+            <input type="text" name="nombrenc" id="nombrenc" v-model="nombrec">
+            <button type="button" class="btn btn-success btn-sm" @click="grabarc(), esconderc=false, nombrec= null">Guardar</button>
+          </div>
+          <br>
+          <label for="imagen">Imagen</label> <br>
+          <input type="text" name="imagen" id="imagen" v-model="imagen">
+          <div id="g"><img width="200" :src="imagen" alt=""></div>
+          <div id="g"><button type="button" class="btn btn-success" @click="grabar()">Grabar</button>
+          </div>
+        </td>
+      </table>
+    </div>
+  </main>
+  <footer></footer>
+
+</body>
+
+</html>
