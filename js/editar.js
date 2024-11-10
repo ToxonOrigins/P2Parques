@@ -4,29 +4,24 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            url: 'https://gehg235.pythonanywhere.com/juegos/' + id,
+            url: 'https://gehg235.pythonanywhere.com/parques/' + id,
             error: false,
             cargando: true,
             id: 0,
             nombre: "",
-            genero: "",
-            anio: "",
+            zona: "",
+            visitantes: "",
             consola: "",
             imagen: "",
-            consolas: [],
-            urlc: 'https://gehg235.pythonanywhere.com/consolas',
-            nombrec: null,
-            urlg: 'https://gehg235.pythonanywhere.com/generos',
+            urlg: 'https://gehg235.pythonanywhere.com/zonas',
             nombreg: null,
-            generos: [],
+            zonas: [],
             esconderg: false,
-            esconderc: false,
             eli: 0,
-            elic: 0
         }
     },
     mounted() {
-        if (sessionStorage.login != "true") {
+        if (sessionStorage.login != "true"&&(sessionStorage.clase!=1 || sessionStorage.clase!=2)) {
             window.location.href = "index.html";
         }
     },
@@ -37,23 +32,10 @@ createApp({
                 .then(data => {
                     this.id = data.id;
                     this.nombre = data.nombre;
-                    this.genero = data.genero;
-                    this.anio = data.anio;
-                    this.consola = data.consola;
+                    this.zona = data.zona;
+                    this.visitantes = data.visitantes;
                     this.imagen = data.imagen;
                     this.cargando = false;
-                })
-                .catch(err => {
-                    console.error(err);
-                    this.error = true
-                })
-        },
-        fetchDatac(urlc) {
-            fetch(urlc)
-                .then(response => response.json())
-                .then(datac => {
-                    this.consolas = datac;
-                    this.cargando = false
                 })
                 .catch(err => {
                     console.error(err);
@@ -64,7 +46,7 @@ createApp({
             fetch(urlg)
                 .then(response => response.json())
                 .then(datag => {
-                    this.generos = datag;
+                    this.zonas = datag;
                     this.cargando = false
                 })
                 .catch(err => {
@@ -73,15 +55,15 @@ createApp({
                 })
         },
         grabar() {
-            let juego = {
+            let parque = {
                 nombre: this.nombre,
-                anio: this.anio,
-                genero: this.genero,
+                visitantes: this.visitantes,
+                zona: this.zona,
                 consola: this.consola,
                 imagen: this.imagen
             }
             var options = {
-                body: JSON.stringify(juego),
+                body: JSON.stringify(parque),
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 redirect: 'follow'
@@ -98,19 +80,19 @@ createApp({
         },
 
         grabarg() {
-            let genero = {
-                id:this.generos.length + 1,
+            let zona = {
+                id:this.zonas.length + 1,
                 nombreg: this.nombreg,
             }
             var options = {
-                body: JSON.stringify(genero),
+                body: JSON.stringify(zona),
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 redirect: 'follow'
             }
             fetch(this.urlg, options)
                 .then(function () {
-                    alert("Genero agregado");
+                    alert("Zona agregada");
                     this.error = false             
                 })
                 .catch(err => {
@@ -119,32 +101,7 @@ createApp({
                     this.error = true
                 })
                 if (this.error== false){
-                    this.generos.push({nombreg: this.nombreg,  id: (this.generos.length + 1) })}
-        },
-        grabarc() {
-            let consola = {
-                id:this.consolas.length + 1,
-                nombrec: this.nombrec,
-            }
-            var options = {
-                body: JSON.stringify(consola),
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                redirect: 'follow'
-            }
-            fetch(this.urlc, options)
-                .then(function () {
-                    alert("Consola agregada");
-                    this.error = false
-                })
-                .catch(err => {
-                    console.error(err);
-                    this.error = true
-                    alert("Error al agregar consola")
-                })
-                if (this.error== false){
-                    this.consolas.push({ nombrec: this.nombrec, id: (this.consolas.length + 1) })
-                }
+                    this.zonas.push({nombreg: this.nombreg,  id: (this.zonas.length + 1) })}
         },
         eliminarg(eli) {
             const urlg = this.urlg + '/' + eli;
@@ -154,32 +111,16 @@ createApp({
             fetch(urlg, options)
                 .then(res => res.text())
                 .then(res => {
-                    alert('Genero Eliminado')
-                    this.generos.pop(eli - 1)
+                    alert('Zona Eliminada')
+                    this.zonas.pop(eli - 1)
                 })
                 .catch(err => {
-                    alert("El género que trata de eliminar esta siendo utilizado, edite todo juego con referencia a este.");
-                })
-        },
-        eliminarc(elic) {
-            const urlc = this.urlc + '/' + elic;
-            var options = {
-                method: 'DELETE',
-            }
-            fetch(urlc, options)
-                .then(res => res.text())
-                .then(res => {
-                    alert('Consola Eliminado')
-                    this.consolas.pop(elic - 1)
-                })
-                .catch(err => {
-                    alert("La consola que trata de eliminar esta siendo utilizada, edite todo juego con referencia a esta.");
+                    alert("La zona que trata de eliminar esta siendo utilizado, edite todo parque con referencia a esta.");
                 })
         },
     },
     created() {
         this.fetchData(this.url),
-            this.fetchDatac(this.urlc),
             this.fetchDatag(this.urlg)
     },
 }).mount('#app')

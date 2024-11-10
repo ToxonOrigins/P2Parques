@@ -1,5 +1,9 @@
 body {
-    background-color: cadetblue;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #12141d 100%);
+    color: #ea7d0f ;
+    font-family: 'Poppins', sans-serif;
 }
 
 .noi {
@@ -12,12 +16,11 @@ img {
     margin: 0%;
     border-spacing: 0px;
 }
-
+main{height: 100%;}
 table {
     margin-top: 10%;
     margin-left: 30%;
-
-    background-color: aliceblue;
+    background-color: #2b2e38;
 }
 
 td {
@@ -25,9 +28,7 @@ td {
 }
 
 .oas {
-
     margin-bottom: 5px;
-
 }
 
 #g {
@@ -56,3 +57,8 @@ input[type="radio"] {
 #nombreng {
     margin-top: 5px;
 }
+#nombre{width: 50%;}
+label{font-weight: bold;}
+.btn-group > .btn{background-color:#9b4320}
+.btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active {background-color:#ea7d0f; color: wheat;}
+.btn-group >.btn:hover{background-color:#ea7d0f; color: wheat;}

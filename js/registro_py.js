@@ -3,7 +3,7 @@ createApp({
     data() {
         return {
             usuarios: [],
-            url: 'http://localhost:5000/usuarios',
+            url: 'https://gehg235.pythonanywhere.com/usuarios',
             error: false,
             cargando: true,
             nombre: "",
@@ -91,22 +91,29 @@ createApp({
             clave = this.clave;
             u = this.u
             usuarios = this.usuarios
+            this.error = true;
+            uc=""
             for (u in usuarios) {
                 if (clave == usuarios[u].clave && mail == usuarios[u].mail) {
                     sessionStorage.setItem("login", "true")
-                    switch (clase){
+                    switch (usuarios[u].clase){
+                        case 0:
+                            sessionStorage.setItem("clase", "1")
+                            uc="creador"
+                            break;
                         case 1:
                             sessionStorage.setItem("clase", "1")
+                            uc="editor"
                             break;
                         case 2:
                             sessionStorage.setItem("clase", "2")
+                            uc="admin"
                             break
                     };
                     this.error = false
-                    alert("Ingreso exitoso");
-                } else { this.error = true; }
+                    alert("Ingreso exitoso como "+uc+".");
+                }
             }
-
             if (this.error == true) {
                 alert("Error al ingresar")
             }
